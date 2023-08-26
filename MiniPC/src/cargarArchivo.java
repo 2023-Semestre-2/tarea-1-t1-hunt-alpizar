@@ -29,8 +29,15 @@ public class cargarArchivo extends javax.swing.JFrame {
      */
     public cargarArchivo() {
         initComponents();
+        inicializarMemoria(100);
     }
 
+    public void inicializarMemoria(int tamanio){
+        for (int i = 0; i < 100; i++) {
+            tablaMemoria.setValueAt(i, i, 0);
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,8 +47,9 @@ public class cargarArchivo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton9 = new javax.swing.JButton();
         archivoSeleccionado = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        cargarArchivo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,11 +68,12 @@ public class cargarArchivo extends javax.swing.JFrame {
         procesadorLabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaMemoria = new javax.swing.JTable();
+
+        jButton9.setText("jButton9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,10 +83,10 @@ public class cargarArchivo extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cargarArchivo.setText("Cargar");
+        cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cargarArchivoActionPerformed(evt);
             }
         });
 
@@ -139,7 +148,7 @@ public class cargarArchivo extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -202,26 +211,131 @@ public class cargarArchivo extends javax.swing.JFrame {
 
         jLabel10.setText("Binario");
 
+        tablaMemoria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {"", null, null},
+                {"", null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "", "asm", "bin"
+            }
+        ));
+        tablaMemoria.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaMemoria);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(165, 165, 165))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jSeparator1)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(165, 165, 165))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,13 +344,9 @@ public class cargarArchivo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,12 +363,12 @@ public class cargarArchivo extends javax.swing.JFrame {
                         .addComponent(procesadorLabel)))
                 .addContainerGap(471, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 162, Short.MAX_VALUE)
+                .addGap(0, 156, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(cargarArchivo))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -270,7 +380,7 @@ public class cargarArchivo extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(cargarArchivo))
                 .addGap(22, 22, 22)
                 .addComponent(procesadorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -279,101 +389,27 @@ public class cargarArchivo extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         archivo = chooser.getSelectedFile();
         String nombreArchivo = archivo.getAbsolutePath();
         archivoSeleccionado.setText(nombreArchivo);
-        
+    
         try {
-            archivoALista(nombreArchivo);
+            Asistente.validarArchivo(nombreArchivo);
         } catch (IOException ex) {
             Logger.getLogger(cargarArchivo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cargarArchivoActionPerformed
 
-    //lee el contenido del archivo y lo transforma a una lista de  de listas
-    //con la siguiente estructura [[operador, registro, valor(opt)],...,...]
-    private void archivoALista(String nombre) throws FileNotFoundException, IOException{
-        List<String> lineasArchivo = new ArrayList<String>();  
-        BufferedReader bf = new BufferedReader(new FileReader(nombre));
-        String linea = bf.readLine();
-       
-        while (linea != null) {
-            lineasArchivo.add(linea);
-            linea = bf.readLine();
-        }
-        bf.close();
-        
-        String[] array = lineasArchivo.toArray(new String[0]);
-        ArrayList<String[]> lista = new ArrayList<String[]>();
-        for (String str : array) {
-            System.out.println(str);//imprime la instruccion transformada a lista
-            String[] instruccion = divideString(str);//agrega dicha lista a la lista de instrucciones
-            System.out.println(Arrays.toString(instruccion));
-            lista.add(instruccion);
-        }
-        System.out.println(Arrays.deepToString(lista.toArray()));//imprime toda la lista de instrucciones
     
-    }
-    
-    //divide cada una de las lineas en listas
-    //por espacio y coma
-    //retorna nulo sino 
-    public static String[] divideString(String input) {
-        String[] dividido = null;
-        String[] lista = input.split(",");
-        
-        if (lista.length == 2) {
-            dividido = new String[3];
-            String valor = lista[1].trim();
-            String operadorYRegistro = lista[0].trim();
-            
-            String[] res = divideStringAux(operadorYRegistro);//dividir primer elemento
-            if(res != null){
-                dividido[0] = res[0];
-                dividido[1] = res[1];
-                dividido[2] = valor; // Value
-            }else{
-                dividido = null;
-            }
-        }
-        else if(lista.length == 1){
-            dividido = new String[2];
-            String operadorYRegistro = lista[0].trim();          
-            String[] res = divideStringAux(operadorYRegistro);//dividir primer elemento
-            if(res != null){
-                dividido[0] = res[0];
-                dividido[1] = res[1];
-            }else{
-                dividido = null;
-            }
-        }
-        else dividido = null;
-        
-        return dividido;
-    }
-    
-    //divide el primer elemento que se obtuvo
-    //este elemento contiene ambos el operador y el registro
-    //se divide en el espacio
-    public static String[] divideStringAux(String operadorYRegistro){
-        String[] res = new String[2];
-        String[] operadorYRegistroLista = operadorYRegistro.split("\\s+");
-        if (operadorYRegistroLista.length == 2) {
-            res[0] = operadorYRegistroLista[0]; // Operador
-            res[1] = operadorYRegistroLista[1]; // registro
-            return res;
-        }
-        return null;
-    }
     
     private void archivoSeleccionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoSeleccionadoActionPerformed
         // TODO add your handling code here:
@@ -418,13 +454,18 @@ public class cargarArchivo extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new cargarArchivo().setVisible(true);
+                
+                
             }
         });
     }
-
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField archivoSeleccionado;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cargarArchivo;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -437,7 +478,7 @@ public class cargarArchivo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -445,8 +486,7 @@ public class cargarArchivo extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel procesadorLabel;
+    private javax.swing.JTable tablaMemoria;
     // End of variables declaration//GEN-END:variables
 }
