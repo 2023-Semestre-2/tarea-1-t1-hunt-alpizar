@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +24,10 @@ import javax.swing.JFileChooser;
 public class cargarArchivo extends javax.swing.JFrame {
 
     File archivo = null;
+    boolean archivoValido = false;
     ArrayList<String[]> espaciosMemoria = new ArrayList<>(100);
+    ArrayList<String[]> instruccionesASM;
+    ArrayList<String[]> instruccionesbin;
     /**
      * Creates new form cargarArchivo
      */
@@ -47,7 +51,6 @@ public class cargarArchivo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton9 = new javax.swing.JButton();
         archivoSeleccionado = new javax.swing.JTextField();
         cargarArchivo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -72,8 +75,9 @@ public class cargarArchivo extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMemoria = new javax.swing.JTable();
-
-        jButton9.setText("jButton9");
+        jButton1 = new javax.swing.JButton();
+        limpiar = new javax.swing.JButton();
+        ejecutar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -321,6 +325,20 @@ public class cargarArchivo extends javax.swing.JFrame {
         tablaMemoria.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaMemoria);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        limpiar.setText("Limpiar");
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -336,6 +354,12 @@ public class cargarArchivo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
                         .addComponent(jLabel10)
                         .addGap(165, 165, 165))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(jButton1)
+                .addGap(122, 122, 122)
+                .addComponent(limpiar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,10 +368,25 @@ public class cargarArchivo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(limpiar)
+                        .addGap(75, 75, 75))))
         );
+
+        ejecutar.setText("Ejecutar");
+        ejecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ejecutarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -363,25 +402,33 @@ public class cargarArchivo extends javax.swing.JFrame {
                         .addComponent(procesadorLabel)))
                 .addContainerGap(471, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 156, Short.MAX_VALUE)
+                .addGap(0, 159, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cargarArchivo))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(134, 134, 134))
+                        .addComponent(cargarArchivo)
+                        .addGap(88, 88, 88)
+                        .addComponent(ejecutar)))
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cargarArchivo))
-                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cargarArchivo))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ejecutar)
+                        .addGap(13, 13, 13)))
                 .addComponent(procesadorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,6 +443,7 @@ public class cargarArchivo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
+        archivoValido = false;
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         archivo = chooser.getSelectedFile();
@@ -403,13 +451,19 @@ public class cargarArchivo extends javax.swing.JFrame {
         archivoSeleccionado.setText(nombreArchivo);
     
         try {
-            Asistente.validarArchivo(nombreArchivo);
+            instruccionesASM =  Asistente.validarArchivo(nombreArchivo);
+            if(instruccionesASM == null){
+                archivoValido = true;
+            }
         } catch (IOException ex) {
             Logger.getLogger(cargarArchivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
-    
+    public static void mostrarError(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje);
+       
+    }
     
     private void archivoSeleccionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoSeleccionadoActionPerformed
         // TODO add your handling code here:
@@ -422,6 +476,41 @@ public class cargarArchivo extends javax.swing.JFrame {
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void ejecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarActionPerformed
+        // TODO add your handling code here:
+        if(instruccionesASM == null){
+            JOptionPane.showMessageDialog(null, "Seleccione un archivo primero");
+        }else{
+            instruccionesbin = Asistente.transformarBinario(instruccionesASM);
+            int largo = Arrays.asList(instruccionesASM.toArray()).size();
+            int posIni = Asistente.escogerPosicion(largo);
+            int j = 0;
+            for (int i = posIni; j < largo; i++) {
+                String instruccionASM = instruccionesASM.get(j)[0]+" "+instruccionesASM.get(j)[1];
+                String instruccionBin = instruccionesbin.get(j)[0]+" "+instruccionesbin.get(j)[1]+" "+instruccionesbin.get(j)[2];
+                if(instruccionesASM.get(j).length == 3) instruccionASM += " "+instruccionesASM.get(j)[2];
+                tablaMemoria.setValueAt( instruccionASM, i, 1);
+                tablaMemoria.setValueAt( instruccionBin, i, 2);
+                j++;
+            }
+            
+                
+        }
+        
+    }//GEN-LAST:event_ejecutarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < 100; i++) {
+            tablaMemoria.setValueAt(null, i, 1);
+            tablaMemoria.setValueAt(null, i, 2);
+        }
+    }//GEN-LAST:event_limpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,7 +554,8 @@ public class cargarArchivo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField archivoSeleccionado;
     private javax.swing.JButton cargarArchivo;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton ejecutar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -486,6 +576,7 @@ public class cargarArchivo extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton limpiar;
     private javax.swing.JLabel procesadorLabel;
     private javax.swing.JTable tablaMemoria;
     // End of variables declaration//GEN-END:variables
