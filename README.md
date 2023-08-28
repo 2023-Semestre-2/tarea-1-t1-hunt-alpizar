@@ -1,7 +1,7 @@
-# [NOMBRE DEL PROYECTO]
+# Mini pc
 ## Integrantes:
-### [Carné] [Nombre]
+### 2018265223 Jean Hunt
+### 2019203348 Andyer Alpizar
 
-### Estado del proyecto: Escala de 1 a 5, 1 siendo completo y 5 deplorable
-### Enlace del video: (Si esto fue solicitado)
-Recordar que el video debe ser público y con sonido para ser visto por el profesor
+### Estado del proyecto (1 a 5): 4.8
+### Enlace del video: https://youtu.be/jjgdgDcv_5o
