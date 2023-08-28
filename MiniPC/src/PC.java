@@ -56,15 +56,27 @@ public class PC {
         PC.registros = registros;
     }
     
+    /*
+        ejecutarMov
+        carga el valor  al registro indicado
+    */
     public void ejecutarMov(String registro, String valorBin) {
         int valor = Asistente.getDecimal(valorBin);
         registros.get(registro).setValor(valor);
     }
 
+    /*
+        ejecutarLoad
+        carga el valor del registro indicado al registro AC
+    */
     public void ejecutarLoad(String registro) {
         registros.get("AC").setValor(registros.get(registro).getValor());
     }
 
+    /*
+        ejecutarAdd
+        suma el valor del registro indicado al registro ac
+    */
     public void ejecutarAdd(String registro) {
         int valorAC = registros.get("AC").getValor();
         int valorReg = registros.get(registro).getValor();
@@ -72,6 +84,10 @@ public class PC {
         registros.get("AC").setValor(nuevoValor);
     }
 
+    /*
+        ejecutarSub
+        resta el valor del registro indicado al registro ac
+    */
     public void ejecutarSub(String registro) {
         int valorAC = registros.get("AC").getValor();
         int valorReg = registros.get(registro).getValor();
@@ -79,6 +95,10 @@ public class PC {
         registros.get("AC").setValor(nuevoValor);
     }
     
+    /*
+        ejecutarStore
+        guarda el valor del registro AC en el registro indicado
+    */
     public void ejecutarStore(String registro) {
         int valorAC = registros.get("AC").getValor();
         registros.get(registro).setValor(valorAC);

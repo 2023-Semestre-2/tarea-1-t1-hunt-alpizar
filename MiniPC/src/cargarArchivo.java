@@ -1,4 +1,5 @@
 
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,14 +35,16 @@ public class cargarArchivo extends javax.swing.JFrame {
     int posActual;
     
     
-    /**
-     * Creates new form cargarArchivo
+    /*
+     * Crea una ventana que permite escoger un archivo
      */
     public cargarArchivo() {
         initComponents();
         inicializarMemoria(100);
     }
 
+    
+    //inicializa las filas de la tabla que representa a la memoria
     public void inicializarMemoria(int tamanio){
         for (int i = 0; i < 100; i++) {
             tablaMemoria.setValueAt(i, i, 0);
@@ -58,8 +61,7 @@ public class cargarArchivo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        archivoSeleccionado = new javax.swing.JTextField();
-        cargarArchivo = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -82,25 +84,18 @@ public class cargarArchivo extends javax.swing.JFrame {
         tablaMemoria = new javax.swing.JTable();
         botSiguiente = new javax.swing.JButton();
         limpiar = new javax.swing.JButton();
+        cargarArchivo = new javax.swing.JButton();
         ejecutar = new javax.swing.JButton();
+        archivoSeleccionado = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mini PC");
+        setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
-        archivoSeleccionado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                archivoSeleccionadoActionPerformed(evt);
-            }
-        });
-
-        cargarArchivo.setText("Cargar");
-        cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cargarArchivoActionPerformed(evt);
-            }
-        });
-
+        jPanel1.setBackground(new java.awt.Color(248, 247, 249));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -115,11 +110,16 @@ public class cargarArchivo extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("DX");
 
+        axInput.setPreferredSize(new java.awt.Dimension(100, 30));
         axInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 axInputActionPerformed(evt);
             }
         });
+
+        bxInput.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        cxInput.setPreferredSize(new java.awt.Dimension(100, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("PC");
@@ -130,12 +130,18 @@ public class cargarArchivo extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("IR");
 
+        pcInput.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        acInput.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        irInput.setPreferredSize(new java.awt.Dimension(100, 30));
         irInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 irInputActionPerformed(evt);
             }
         });
 
+        dxInput.setPreferredSize(new java.awt.Dimension(100, 30));
         dxInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dxInputActionPerformed(evt);
@@ -147,7 +153,7 @@ public class cargarArchivo extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
@@ -159,55 +165,58 @@ public class cargarArchivo extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(pcInput, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(acInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(irInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(axInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(bxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                        .addComponent(pcInput, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(acInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(irInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(axInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel4)
-                    .addComponent(pcInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pcInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel6)
-                    .addComponent(acInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(acInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel7)
-                    .addComponent(irInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(irInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
-                    .addComponent(axInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(axInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel2)
-                    .addComponent(bxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(dxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(dxInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, pcInput});
 
+        procesadorLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         procesadorLabel.setText("Procesador");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Memoria");
 
+        jPanel2.setBackground(new java.awt.Color(248, 247, 249));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tablaMemoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -328,6 +337,7 @@ public class cargarArchivo extends javax.swing.JFrame {
             }
         });
         tablaMemoria.setRowHeight(30);
+        tablaMemoria.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tablaMemoria.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaMemoria);
         tablaMemoria.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -340,6 +350,9 @@ public class cargarArchivo extends javax.swing.JFrame {
         }
 
         botSiguiente.setText("Siguiente");
+        botSiguiente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botSiguiente.setBorderPainted(false);
+        botSiguiente.setPreferredSize(new java.awt.Dimension(100, 30));
         botSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botSiguienteActionPerformed(evt);
@@ -347,6 +360,9 @@ public class cargarArchivo extends javax.swing.JFrame {
         });
 
         limpiar.setText("Limpiar");
+        limpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        limpiar.setBorderPainted(false);
+        limpiar.setPreferredSize(new java.awt.Dimension(100, 30));
         limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarActionPerformed(evt);
@@ -358,119 +374,237 @@ public class cargarArchivo extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(botSiguiente)
-                        .addGap(122, 122, 122)
-                        .addComponent(limpiar))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(botSiguiente)
-                    .addComponent(limpiar))
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9))
         );
 
+        cargarArchivo.setText("Cargar");
+        cargarArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cargarArchivo.setBorderPainted(false);
+        cargarArchivo.setPreferredSize(new java.awt.Dimension(100, 30));
+        cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarArchivoActionPerformed(evt);
+            }
+        });
+
         ejecutar.setText("Ejecutar");
+        ejecutar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ejecutar.setBorderPainted(false);
+        ejecutar.setPreferredSize(new java.awt.Dimension(100, 30));
         ejecutar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ejecutarActionPerformed(evt);
             }
         });
 
+        archivoSeleccionado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                archivoSeleccionadoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Archivo");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(301, 301, 301)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(cargarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addComponent(ejecutar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(procesadorLabel)
+                        .addGap(80, 80, 80)))
+                .addGap(60, 60, 60))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ejecutar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cargarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(procesadorLabel))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(procesadorLabel)
-                .addGap(167, 167, 167))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cargarArchivo)
-                        .addGap(18, 18, 18)
-                        .addComponent(ejecutar)))
-                .addGap(112, 112, 112))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(archivoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cargarArchivo)
-                            .addComponent(ejecutar)
-                            .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(procesadorLabel)
-                        .addGap(1, 1, 1)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
-        archivoValido = false;
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        archivo = chooser.getSelectedFile();
-        String nombreArchivo = archivo.getAbsolutePath();
-        archivoSeleccionado.setText(nombreArchivo);
-    
-        try {
-            miPC.setInstruccionesASM(Asistente.validarArchivo(nombreArchivo));
-            if(miPC.getInstruccionesASM() == null){
-                archivoValido = true;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(cargarArchivo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_cargarArchivoActionPerformed
-
+    //Crea un dialogo con el mensaje indicado
     public static void mostrarError(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje);
        
     }
     
+    private void botSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botSiguienteActionPerformed
+
+        if(miPC.getInstruccionesbin() == null){//si no se ha seleccionado archivo
+            JOptionPane.showMessageDialog(null, "Seleccione un archivo primero");
+        }else{
+            if(posActual-posIni<miPC.getInstruccionesbin().size()){//mientras que la cantidad de 
+                ejecutarInstruccion();                                  //posiciones recorrida se menor que el total de instrucciones
+            } else{
+                JOptionPane.showMessageDialog(null, "Se han ejecutado todas las instrucciones");
+            }
+        }  
+    }//GEN-LAST:event_botSiguienteActionPerformed
+
+    //Solicita a miPc la ejecucion de la instruccion
+    private void ejecutarInstruccion(){
+        String instruccion = tablaMemoria.getValueAt(posActual, 2).toString();
+            String[] elementos = instruccion.split(" ");
+            String valorAR =Integer.toString(Integer.parseInt(elementos[0],2))
+                    + Integer.toString(Integer.parseInt(elementos[1],2))
+                    + Integer.toString(Integer.parseInt(elementos[2].substring(1),2));
+            irInput.setText(valorAR);
+            tablaMemoria.removeRowSelectionInterval(posActual-1, posActual-1);
+            tablaMemoria.addRowSelectionInterval(posActual, posActual);
+            posActual++;
+            if(elementos[0].equals("0011")){//mov
+                miPC.ejecutarMov(elementos[1],elementos[2]);
+                actualizarInput(elementos[1]);
+            }else if(elementos[0].equals("0001")){//LOAD
+                miPC.ejecutarLoad(elementos[1]);
+                actualizarInput("AC");
+            }else if(elementos[0].equals("0101")){//ADD
+                miPC.ejecutarAdd(elementos[1]);
+                actualizarInput("AC");
+            }else if(elementos[0].equals("0100")){//ADD
+                miPC.ejecutarSub(elementos[1]);
+                actualizarInput("AC");
+            }else if(elementos[0].equals("0010")){//ADD
+                miPC.ejecutarStore(elementos[1]);
+                actualizarInput(elementos[1]);
+            }
+            pcInput.setText(Integer.toString(posActual));          
+            //System.out.println("Largo: "+miPC.getInstruccionesbin().size()+" actual: "+ (posActual-posIni) );
+    }
+    
+    //Luego de la ejecución de la instrucción actualiza la interfaz grafica
+    private void actualizarInput(String registro) {
+        if (registro.equals("0001")) {//ax
+            axInput.setText(Integer.toString(
+                    miPC.getRegistros().get(registro).getValor()));
+        } else if (registro.equals("0010")) {//bx
+            bxInput.setText(Integer.toString(
+                    miPC.getRegistros().get(registro).getValor()));
+        } else if (registro.equals("0011")) {//cx
+            cxInput.setText(Integer.toString(
+                    miPC.getRegistros().get(registro).getValor()));
+        } else if (registro.equals("0100")) {//dx
+            dxInput.setText(Integer.toString(
+                    miPC.getRegistros().get(registro).getValor()));
+        } else if (registro.equals("AC")) {//ac
+            acInput.setText(Integer.toString(
+                    miPC.getRegistros().get(registro).getValor()));
+        }
+    }
+    
+    
+    //Resetea el programa para una nueva ejecucion
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < 100; i++) {
+            tablaMemoria.setValueAt(null, i, 1);
+            tablaMemoria.setValueAt(null, i, 2);
+        }
+        pcInput.setText("");
+        acInput.setText("");
+        irInput.setText("");
+        axInput.setText("");
+        bxInput.setText("");
+        cxInput.setText("");
+        dxInput.setText("");
+        archivoSeleccionado.setText("");
+        
+    }//GEN-LAST:event_limpiarActionPerformed
+
+    
+    private void irInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_irInputActionPerformed
+
+    private void axInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_axInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_axInputActionPerformed
+
+    private void dxInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dxInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dxInputActionPerformed
+
     private void archivoSeleccionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoSeleccionadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_archivoSeleccionadoActionPerformed
 
+    /*
+        ejecutar
+        Luego de haber cargado el archivo inicia los procesos necesarios para la ejecución de cada instruccion
+        -crea la lista de instrucciones asm
+        -crea la lista de instrucciones bin
+        -escoge una posicion inicial para las instrucciones
+    */
     private void ejecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarActionPerformed
         // TODO add your handling code here:
         ArrayList<String[]> instruccionesASM = miPC.getInstruccionesASM();
@@ -490,98 +624,35 @@ public class cargarArchivo extends javax.swing.JFrame {
                 tablaMemoria.setValueAt( instruccionASM, i, 1);
                 tablaMemoria.setValueAt( instruccionBin, i, 2);
                 j++;
-            }   
-            
+            }
+
             //tablaMemoria.addRowSelectionInterval(posIni, posIni);
             pcInput.setText(Integer.toString(posIni));
-            
+            tablaMemoria.scrollRectToVisible(new Rectangle(tablaMemoria.getCellRect(posIni+9, 0, true)));
         }
-        
         miPC.setInstruccionesASM(instruccionesASM);
         miPC.setInstruccionesbin(instruccionesbin);
-        
+
     }//GEN-LAST:event_ejecutarActionPerformed
 
-    private void botSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botSiguienteActionPerformed
-        // TODO add your handling code here:
-        if(posActual-posIni<miPC.getInstruccionesbin().size()){
-            ejecutarInstruccion();
-        }
-    }//GEN-LAST:event_botSiguienteActionPerformed
+    //Seleccionar archivo
+    private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
+        archivoValido = false;
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        archivo = chooser.getSelectedFile();
+        String nombreArchivo = archivo.getAbsolutePath();
+        archivoSeleccionado.setText(nombreArchivo);
 
-    private void ejecutarInstruccion(){
-        String instruccion = tablaMemoria.getValueAt(posActual, 2).toString();
-            String[] elementos = instruccion.split(" ");
-            System.out.println("operador: "+elementos[0]);
-            String valorAR =Integer.toString(Integer.parseInt(elementos[0],2))
-                    + Integer.toString(Integer.parseInt(elementos[1],2))
-                    + Integer.toString(Integer.parseInt(elementos[2].substring(1),2));
-            irInput.setText(valorAR);
-            System.out.println(valorAR);
-            tablaMemoria.removeRowSelectionInterval(posActual-1, posActual-1);
-            tablaMemoria.addRowSelectionInterval(posActual, posActual);
-            posActual++;
-            System.out.println(elementos[0].getClass());
-            if(elementos[0].equals("0011")){//mov
-                //System.out.println("registro: "+elementos[1]+" valor: "+elementos[2]);
-                miPC.ejecutarMov(elementos[1],elementos[2]);
-                actualizarInput(elementos[1]);
-            }else if(elementos[0].equals("0001")){//LOAD
-                miPC.ejecutarLoad(elementos[1]);
-                actualizarInput("AC");
-            }else if(elementos[0].equals("0101")){//ADD
-                miPC.ejecutarAdd(elementos[1]);
-                actualizarInput("AC");
-            }else if(elementos[0].equals("0100")){//ADD
-                miPC.ejecutarSub(elementos[1]);
-                actualizarInput("AC");
-            }else if(elementos[0].equals("0010")){//ADD
-                miPC.ejecutarStore(elementos[1]);
-                actualizarInput(elementos[1]);
+        try {
+            miPC.setInstruccionesASM(Asistente.validarArchivo(nombreArchivo));
+            if(miPC.getInstruccionesASM() == null){
+                archivoValido = true;
             }
-            pcInput.setText(Integer.toString(posActual));          
-            System.out.println("Largo: "+miPC.getInstruccionesbin().size()+" actual: "+ (posActual-posIni) );
-    }
-    
-   private void actualizarInput(String registro){
-       if(registro.equals("0001")){
-           axInput.setText(Integer.toString(
-                   miPC.getRegistros().get(registro).getValor()));
-       }else if(registro.equals("0010")){
-           bxInput.setText(Integer.toString(
-                   miPC.getRegistros().get(registro).getValor()));
-       }else if(registro.equals("0011")){
-           cxInput.setText(Integer.toString(
-                   miPC.getRegistros().get(registro).getValor()));
-       }else if(registro.equals("0100")){
-           dxInput.setText(Integer.toString(
-                   miPC.getRegistros().get(registro).getValor()));
-       }else if(registro.equals("AC")){
-           acInput.setText(Integer.toString(
-                   miPC.getRegistros().get(registro).getValor()));
-       }
-   }
-    
-    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-        // TODO add your handling code here:
-        for (int i = 0; i < 100; i++) {
-            tablaMemoria.setValueAt(null, i, 1);
-            tablaMemoria.setValueAt(null, i, 2);
+        } catch (IOException ex) {
+            Logger.getLogger(cargarArchivo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_limpiarActionPerformed
-
-    
-    private void irInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_irInputActionPerformed
-
-    private void axInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_axInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_axInputActionPerformed
-
-    private void dxInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dxInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dxInputActionPerformed
+    }//GEN-LAST:event_cargarArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -644,6 +715,7 @@ public class cargarArchivo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
     private javax.swing.JTextField pcInput;

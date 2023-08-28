@@ -36,42 +36,42 @@ public class Asistente {
         binarios.put("CX","0011");
         binarios.put("DX","0100");
     }
+    /*
+        valida que el archvo con la ruta señalada cumpla con las caracteristicas
+        del lenguaje asm
+    */
     public static ArrayList<String[]> validarArchivo(String nombre) throws IOException{
         ArrayList<String[]> lista = convertirArchivoLista(nombre);
         if(lista!= null && validarLista(lista)){
             int tamanioLista =  Arrays.asList(lista.toArray()).size();
-            System.err.println("Tamanio: " + tamanioLista);
             if(tamanioLista > 90){
-                System.out.println("El archivo no puede exceder las 90 instrucciones");
                 cargarArchivo.mostrarError("El archivo no puede exceder las 90 instrucciones");
                 return null;
             }
         }else{
-            System.out.println("El archivo seleccionado no es valido");
             cargarArchivo.mostrarError("El archivo seleccionado no es valido");
             return null;
         }
-        System.out.println("Termino la validacion");
         return lista;
     }
     
-    
+    /*
+        ValidarLista
+        valida que todos los elementos de la lista de instrucciones
+        pertenescan a la gramatica asm
+    */
     public static boolean validarLista(ArrayList<String[]> lista){
-        System.out.println("Validando lista +++++++++++++++++++++++++");
         int tamanioLista = Arrays.asList(lista).size();
-        System.out.println("Tamanio: " + tamanioLista);
         if(tamanioLista>90 || tamanioLista<1) return false;
         for(String [] str : lista){
-            System.out.println("op: "+ str[0] + "    registro: "+ str[1] + " valor");
             boolean operadorValido = (Arrays.asList(OPERADORESVALIDO).contains(str[0]));
             boolean registroValido = (Arrays.asList(REGISTROSVALIDOS).contains(str[1]));
             boolean esEntero = true;
             if(str.length == 3){
                 esEntero = esEntero(str[2]);
                 if(Integer.parseInt(str[2])>127) return false;
-            }else{System.out.println("No hay valor");}
+            }
             if(!(operadorValido && registroValido && esEntero )){
-                System.out.println("operacion invalida");
                 return false;
             }
             
@@ -79,6 +79,10 @@ public class Asistente {
         return true;
     }
     
+    /*
+        esEntero
+        Valida si un string contiene un numero
+    */
     public static boolean esEntero(String strNum) {
     if (strNum == null) {
         return false;
@@ -96,36 +100,26 @@ public class Asistente {
     public static ArrayList<String[]> convertirArchivoLista(String nombre) throws FileNotFoundException, IOException{
         List<String> lineasArchivo = new ArrayList<String>();  
         BufferedReader bf = new BufferedReader(new FileReader(nombre));
-        String linea = bf.readLine();
-       
+        String linea = bf.readLine();      
         while (linea != null) {
-            System.out.println("linea: "+linea);
             if(!linea.equals("")){
-                lineasArchivo.add(linea);   
+                lineasArchivo.add(linea);//ignora lineas en blanco   
             }
-            linea = bf.readLine();
-            
+            linea = bf.readLine();  
         }
-        bf.close();
-        
+        bf.close();       
         String[] array = lineasArchivo.toArray(new String[0]);
         ArrayList<String[]> lista = new ArrayList<String[]>();
         
         for (String str : array) {
-            System.out.println("entre al loop");
-            System.out.println(str);//imprime la instruccion transformada a lista
             String[] instruccion = divideString(str);//agrega dicha lista a la lista de instrucciones
             if(instruccion == null) return null;
             String instruccionStr = Arrays.toString(instruccion);
-            System.out.println(instruccionStr);
             lista.add(instruccion);
         }
-        System.out.println(Arrays.deepToString(lista.toArray()));//imprime toda la lista de instrucciones
         if(lista.isEmpty()){
-            System.out.println("La lista esta vacia");
-            return null;
+            return null;//la lista no puede ser vacia
         }
-        
         return lista;
     
     }
@@ -136,12 +130,10 @@ public class Asistente {
     public static String[] divideString(String input) {
         String[] dividido = null;
         String[] lista = input.split(",");
-        System.out.println("Asistente.divideString()");
         if (lista.length == 2) {
             dividido = new String[3];
             String valor = lista[1].trim();
-            String operadorYRegistro = lista[0].trim();
-            
+            String operadorYRegistro = lista[0].trim();    
             String[] res = divideStringAux(operadorYRegistro);//dividir primer elemento
             if(res != null){
                 dividido[0] = res[0].toUpperCase();
@@ -152,7 +144,6 @@ public class Asistente {
             }
         }
         else if(lista.length == 1){
-            System.out.println("el largo es 1");
             dividido = new String[2];
             String operadorYRegistro = lista[0].trim();          
             String[] res = divideStringAux(operadorYRegistro);//dividir primer elemento
@@ -182,24 +173,33 @@ public class Asistente {
         return null;
     }
     
+    
+    /*
+        escogerPosicion
+        escoge una posicion aleatoria en memoria para ubicar las entradas
+        -las primeras diez posiciones están reservadas
+        -la posicion debe tener como minimo n posiciones libres despues del indice
+        siendo n el largo del la lista de instrucciones
+    */
     public static int escogerPosicion(int largo){
         Random rand = new Random();
         int posicion = 0;
         if(largo == 90) posicion = 10;
         else{
-            for(int i = 0; i<100; i++){
-                posicion = rand.nextInt(10, 100-largo);
-                System.out.println(posicion);
-            }
+            posicion = rand.nextInt(10, 100-largo);
         }
         return posicion;
     }
     
+    /*
+        TransformarBinario
+        transforma la lista de instrucciones de ensamblador a binario
+    */
     public static ArrayList<String[]> transformarBinario(ArrayList<String[]> instruccionesASM){
         ArrayList<String[]> listaBinario = new ArrayList<>();
         for(String[] str : instruccionesASM){
             String[] temp = new String[3];
-            temp[0] = binarios.get(str[0].toUpperCase());
+            temp[0] = binarios.get(str[0].toUpperCase());//verifica que el registro pertenezca a la gramatica
             temp[1] = binarios.get(str[1].toUpperCase());
             if(str.length == 3){
                 int numero = Integer.parseInt(str[2]);
@@ -213,6 +213,10 @@ public class Asistente {
         return listaBinario;
     }
     
+    /*
+        numeroABinario
+        transforma de decimal a binario
+    */
     public static String numeroABinario(int numero){
         String binario = Integer.toBinaryString(Math.abs(numero));
         for(int i = 7-binario.length(); i>0; i--){
@@ -227,10 +231,14 @@ public class Asistente {
         return binario;
     }
     
-     public static int getDecimal(String valorBin){
-        int res = Integer.parseInt(valorBin.substring(1),2);
-        if(valorBin.charAt(0) =='1'){
-           return res*-1;
+    /*
+        getDecimal
+        transforma de binario a decimal
+    */
+    public static int getDecimal(String valorBin) {
+        int res = Integer.parseInt(valorBin.substring(1), 2);
+        if (valorBin.charAt(0) == '1') {
+            return res * -1;
         }
         return res;
     }

@@ -6,7 +6,9 @@
 /**
  *
  * @author jeanp
+ * 
  */
+// Crea un registro 
 public class Registro {
     private String nombre;
     private int valor;
