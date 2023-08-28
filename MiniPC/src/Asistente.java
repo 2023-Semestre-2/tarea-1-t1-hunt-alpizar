@@ -99,8 +99,12 @@ public class Asistente {
         String linea = bf.readLine();
        
         while (linea != null) {
-            lineasArchivo.add(linea);
+            System.out.println("linea: "+linea);
+            if(!linea.equals("")){
+                lineasArchivo.add(linea);   
+            }
             linea = bf.readLine();
+            
         }
         bf.close();
         
@@ -221,5 +225,13 @@ public class Asistente {
         }
           System.out.println(binario); 
         return binario;
+    }
+    
+     public static int getDecimal(String valorBin){
+        int res = Integer.parseInt(valorBin.substring(1),2);
+        if(valorBin.charAt(0) =='1'){
+           return res*-1;
+        }
+        return res;
     }
 }
